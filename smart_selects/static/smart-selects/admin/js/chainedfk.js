@@ -47,6 +47,8 @@
                     return;
                 }
                 $.getJSON(url, function (j) {
+                    // only get the response object and use it
+                    j = j.response;
                     auto_choose = j.length === 1 && auto_choose;
                     // Append empty label as the first option
                     if (!(init_value || auto_choose)) {
@@ -75,8 +77,8 @@
                     if (navigator.appVersion.indexOf("MSIE") !== -1) {
                         $selectField.width(width + 'px');
                     }
-
-                    $selectField.trigger('change');
+                    // disable trigger manually, browser automatically triggers onChange
+                    // $selectField.trigger('change');
                 });
             },
             init: function (chainfield, url, id, init_value, empty_label, auto_choose) {
